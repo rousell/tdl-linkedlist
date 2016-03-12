@@ -52,7 +52,6 @@ namespace SinglyLinkedLists
         {
             this.value = value; 
             // this is a private data member, not setting the property
-            //throw new NotImplementedException();
 
             // Used by the visualizer:
             allNodes.Add(this);
@@ -60,18 +59,51 @@ namespace SinglyLinkedLists
 
         public override string ToString()
         {
-            return value.ToString();
+            return this.value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            SinglyLinkedListNode temp = obj as SinglyLinkedListNode;
+            if (temp == null)
+            {
+                return false;
+            }
+            else if (this.value == temp.ToString())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
         public int CompareTo(Object obj)
         {
-            throw new NotImplementedException();
+            if (obj.ToString()[0] > this.value[0])
+            {
+                return -1;
+            } else if (obj.ToString()[0] < this.value[0])
+            {
+                return 1;
+            } else
+            {
+                return 0;
+            }
         }
 
         public bool IsLast()
         {
-            throw new NotImplementedException();
+            if (this.next == null)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+            //throw new NotImplementedException();
         }
     }
 }
