@@ -15,8 +15,19 @@ namespace SinglyLinkedLists
         private SinglyLinkedListNode next;
         public SinglyLinkedListNode Next
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return this.next; }
+            set {
+                if (value == this)
+                {
+                    throw new ArgumentException();
+                }
+
+
+                this.next = value;
+                    // value keyword refers to anything on the 
+                    // right side of the sign operator, '='
+                    
+                    }
         }
 
         private string value; /*Access using "this.value"*/
@@ -39,11 +50,17 @@ namespace SinglyLinkedLists
 
         public SinglyLinkedListNode(string value)
         {
-            this.value = value; // this is a private data member, not setting the property
+            this.value = value; 
+            // this is a private data member, not setting the property
             //throw new NotImplementedException();
 
             // Used by the visualizer:
             allNodes.Add(this);
+        }
+
+        public override string ToString()
+        {
+            return value.ToString();
         }
 
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
