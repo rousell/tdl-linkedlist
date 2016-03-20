@@ -9,6 +9,21 @@ namespace SinglyLinkedLists
     {
         public SinglyLinkedListNode FirstNode { get; set; }
 
+        public override string ToString()
+        {
+            string str;
+            if (FirstNode == null)
+            {
+                return "{ }";
+            }
+            else
+            {
+                str = "{ \"" + FirstNode + "\" }";
+                //{ \"foo\" }
+                return str;
+            }
+        }
+
         public SinglyLinkedList()
         {
             // NOTE: This constructor isn't necessary, once you've implemented the constructor below.
@@ -42,7 +57,7 @@ namespace SinglyLinkedLists
         {
             SinglyLinkedListNode node = new SinglyLinkedListNode(value);
 
-
+            //node = LastNode(); - does not currently work
             if (FirstNode == null)
             {
                 FirstNode = node;
@@ -103,7 +118,7 @@ namespace SinglyLinkedLists
         // HINT 2: I suggest writing a private helper method LastNode()
         // HINT 3: If you highlight code and right click, you can use the refactor menu to extract a method for you...
 
-        private string LastNode()
+        private SinglyLinkedListNode LastNode()
         {
             SinglyLinkedListNode lastnode;
             SinglyLinkedListNode currentnode = FirstNode;
@@ -118,8 +133,8 @@ namespace SinglyLinkedLists
                 {
                     currentnode = currentnode.Next;
                 }
-                lastnode = currentnode.Next;
-                return lastnode.Value;
+                lastnode = currentnode;
+                return lastnode;
             }
         }
 
@@ -128,21 +143,9 @@ namespace SinglyLinkedLists
             if (FirstNode == null)
             {
                 return null;
-            } 
-            else if (FirstNode.Next == null)
-            {
-                return FirstNode.Value;
             }
-            else if (FirstNode.Next.Next == null)
-            {
-                return FirstNode.Next.Value;
-            }
-            else if (FirstNode.Next.Next.Next == null)
-            {
-                return FirstNode.Next.Next.Value;
-            } else
-            {
-                return "string";
+            else {
+                return LastNode().Value;
             }
         }
 
