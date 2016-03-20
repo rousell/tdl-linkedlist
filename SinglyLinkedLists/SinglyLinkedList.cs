@@ -7,6 +7,8 @@ namespace SinglyLinkedLists
 {
     public class SinglyLinkedList
     {
+        public SinglyLinkedListNode FirstNode { get; set; }
+
         public SinglyLinkedList()
         {
             // NOTE: This constructor isn't necessary, once you've implemented the constructor below.
@@ -32,12 +34,28 @@ namespace SinglyLinkedLists
 
         public void AddFirst(string value)
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode node = new SinglyLinkedListNode(value);
+            FirstNode = node;
         }
 
         public void AddLast(string value)
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode node = new SinglyLinkedListNode(value);
+
+
+            if (FirstNode == null)
+            {
+                FirstNode = node;
+            } else if (FirstNode.Next == null)
+            {
+                FirstNode.Next = node;
+            } else if (FirstNode.Next.Next == null)
+            {
+                FirstNode.Next.Next = node;
+            } else
+            {
+                
+            }
         }
 
         // NOTE: There is more than one way to accomplish this.  One is O(n).  The other is O(1).
@@ -48,12 +66,27 @@ namespace SinglyLinkedLists
 
         public string ElementAt(int index)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            SinglyLinkedListNode currentnode = FirstNode;
+
+            if (FirstNode == null)
+            {
+                throw new ArgumentOutOfRangeException();
+            } else
+            {
+                while (i < index)
+                {
+                    currentnode = currentnode.Next;
+                    i++;
+                }
+                return currentnode.Value;
+            }
+            
         }
 
         public string First()
         {
-            throw new NotImplementedException();
+            return FirstNode?.ToString();
         }
 
         public int IndexOf(string value)
@@ -71,7 +104,22 @@ namespace SinglyLinkedLists
         // HINT 3: If you highlight code and right click, you can use the refactor menu to extract a method for you...
         public string Last()
         {
-            throw new NotImplementedException();
+            if (FirstNode == null)
+            {
+                return null;
+            } 
+            else if (FirstNode.Next == null)
+            {
+                return FirstNode.Value;
+            }
+            else if (FirstNode.Next.Next == null)
+            {
+                return FirstNode.Next.Value;
+            }
+            else
+            {
+                return "string";
+            }
         }
 
         public void Remove(string value)

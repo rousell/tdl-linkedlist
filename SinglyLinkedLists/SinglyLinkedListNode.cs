@@ -103,7 +103,6 @@ namespace SinglyLinkedLists
             {
                 return false;
             }
-            //throw new NotImplementedException();
         }
     }
 }
