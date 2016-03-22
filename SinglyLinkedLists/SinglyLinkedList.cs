@@ -16,11 +16,17 @@ namespace SinglyLinkedLists
             {
                 return "{ }";
             }
-            else
+            else if (FirstNode.Next == null)
             {
                 str = "{ \"" + FirstNode + "\" }";
-                //{ \"foo\" }
                 return str;
+            }
+            {
+                var strBuilder = new System.Text.StringBuilder();
+                strBuilder.Append("{ \"" + FirstNode + "\", ");
+                strBuilder.Append("\"" + FirstNode.Next + "\", ");
+                strBuilder.Append("\"" + FirstNode.Next.Next + "\" }");
+                return strBuilder.ToString();
             }
         }
 
@@ -69,14 +75,21 @@ namespace SinglyLinkedLists
                 FirstNode.Next.Next = node;
             } else
             {
-                
+                FirstNode.Next.Next.Next = node;
             }
         }
 
         // NOTE: There is more than one way to accomplish this.  One is O(n).  The other is O(1).
         public int Count()
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode currentnode = FirstNode;
+            int i = 0;
+            while (currentnode != null)
+            {
+                currentnode = currentnode.Next;
+                i++;
+            }
+            return i;
         }
 
         public string ElementAt(int index)
@@ -87,7 +100,7 @@ namespace SinglyLinkedLists
             if (FirstNode == null)
             {
                 throw new ArgumentOutOfRangeException();
-            } else
+            } else if (currentnode != null)
             {
                 while (i < index)
                 {
@@ -95,6 +108,9 @@ namespace SinglyLinkedLists
                     i++;
                 }
                 return currentnode.Value;
+            } else
+            {
+                return null;
             }
             
         }
@@ -161,7 +177,20 @@ namespace SinglyLinkedLists
 
         public string[] ToArray()
         {
-            throw new NotImplementedException();
+            if (FirstNode == null)
+            {
+                string[] empty = { };
+                return empty;
+            }
+            else 
+            {
+                string[] listArray = new string[this.Count()];
+                for (int i = 0; i < this.Count(); i++)
+                {
+                    listArray[i] = ElementAt(i);
+                }
+                return listArray;
+            }
         }
     }
 }
