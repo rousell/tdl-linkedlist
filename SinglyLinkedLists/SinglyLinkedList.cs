@@ -61,10 +61,24 @@ namespace SinglyLinkedLists
 
         public void AddLast(string value)
         {
+            SinglyLinkedListNode currentnode = FirstNode;
             SinglyLinkedListNode node = new SinglyLinkedListNode(value);
 
             //node = LastNode(); - does not currently work
             if (FirstNode == null)
+            {
+                FirstNode = node;
+            }
+            else
+            {
+                while (currentnode.Next != null)
+                {
+                    currentnode = currentnode.Next;
+                }
+                currentnode.Next = node;
+            }
+
+            /*if (FirstNode == null)
             {
                 FirstNode = node;
             } else if (FirstNode.Next == null)
@@ -76,7 +90,7 @@ namespace SinglyLinkedLists
             } else
             {
                 FirstNode.Next.Next.Next = node;
-            }
+            }*/
         }
 
         // NOTE: There is more than one way to accomplish this.  One is O(n).  The other is O(1).
@@ -184,8 +198,9 @@ namespace SinglyLinkedLists
             }
             else 
             {
-                string[] listArray = new string[this.Count()];
-                for (int i = 0; i < this.Count(); i++)
+                int c = this.Count();
+                string[] listArray = new string[c];
+                for (int i = 0; i < c; i++)
                 {
                     listArray[i] = ElementAt(i);
                 }
