@@ -11,21 +11,36 @@ namespace SinglyLinkedLists
 
         public override string ToString()
         {
-            string str;
+            SinglyLinkedListNode currentnode = FirstNode;
+            var strBuilder = new System.Text.StringBuilder();
             if (FirstNode == null)
             {
                 return "{ }";
             }
-            else if (FirstNode.Next == null)
+            else
             {
-                str = "{ \"" + FirstNode + "\" }";
-                return str;
-            }
-            {
-                var strBuilder = new System.Text.StringBuilder();
-                strBuilder.Append("{ \"" + FirstNode + "\", ");
-                strBuilder.Append("\"" + FirstNode.Next + "\", ");
-                strBuilder.Append("\"" + FirstNode.Next.Next + "\" }");
+                int i = 0;
+                while (currentnode != null)
+                {
+                    if (i == 0 && currentnode.Next == null)
+                    {
+                        strBuilder.Append("{ \"" + currentnode + "\" }");
+                    }
+                    else if (i == 0 && currentnode.Next != null)
+                    {
+                        strBuilder.Append("{ \"" + currentnode + "\"");
+                    }
+                    else if (currentnode.Next != null)
+                    {
+                        strBuilder.Append(", \"" + currentnode + "\"");
+                    }
+                    else if (currentnode.Next == null)
+                    {
+                        strBuilder.Append(", \"" + currentnode + "\" }");
+                    }
+                    currentnode = currentnode.Next;
+                    i++;
+                }
                 return strBuilder.ToString();
             }
         }
@@ -50,13 +65,43 @@ namespace SinglyLinkedLists
 
         public void AddAfter(string existingValue, string value)
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode node = new SinglyLinkedListNode(value);
+            SinglyLinkedListNode existVal = new SinglyLinkedListNode(existingValue);
+            SinglyLinkedListNode currentnode = FirstNode;
+            if (FirstNode == null)
+            {
+                throw new ArgumentNullException();
+            } else
+            {
+                while (currentnode.Value != existingValue)
+                {
+                    currentnode = currentnode.Next;
+
+                    if (currentnode == null)
+                    {
+                        throw new ArgumentException();
+                    }
+                }
+                if (currentnode.Value == existingValue)
+                {
+                    node.Next = currentnode.Next;
+                    currentnode.Next = node;
+                }
+            }
         }
 
         public void AddFirst(string value)
         {
             SinglyLinkedListNode node = new SinglyLinkedListNode(value);
-            FirstNode = node;
+
+            if (FirstNode != null)
+            {
+                node.Next = FirstNode;
+                FirstNode = node;
+            } else
+            {
+                FirstNode = node;
+            }
         }
 
         public void AddLast(string value)
@@ -77,20 +122,6 @@ namespace SinglyLinkedLists
                 }
                 currentnode.Next = node;
             }
-
-            /*if (FirstNode == null)
-            {
-                FirstNode = node;
-            } else if (FirstNode.Next == null)
-            {
-                FirstNode.Next = node;
-            } else if (FirstNode.Next.Next == null)
-            {
-                FirstNode.Next.Next = node;
-            } else
-            {
-                FirstNode.Next.Next.Next = node;
-            }*/
         }
 
         // NOTE: There is more than one way to accomplish this.  One is O(n).  The other is O(1).
