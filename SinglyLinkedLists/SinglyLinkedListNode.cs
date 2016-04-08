@@ -80,7 +80,7 @@ namespace SinglyLinkedLists
         }
 
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
-        public int CompareTo(Object obj)
+        public int CompareTo(object obj)
         {
             if (obj.ToString()[0] > this.value[0])
             {

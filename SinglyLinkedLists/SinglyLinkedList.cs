@@ -45,22 +45,47 @@ namespace SinglyLinkedLists
             }
         }
 
-        public SinglyLinkedList()
+        /*public SinglyLinkedList()
         {
             // NOTE: This constructor isn't necessary, once you've implemented the constructor below.
-        }
+        }*/
 
         // READ: http://msdn.microsoft.com/en-us/library/aa691335(v=vs.71).aspx
         public SinglyLinkedList(params object[] values)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < values.Length; i++)
+            {
+                this.AddLast((string)values[i]);
+            }
         }
 
+        
         // READ: http://msdn.microsoft.com/en-us/library/6x16t2tx.aspx
         public string this[int i]
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return this.ElementAt(i); }
+            set
+            {
+                if (i == 0)
+                {
+                    AddFirst(value);
+                } else
+                {
+                    UpdateValue(i, value);
+                }
+            }
+        }
+
+        public void UpdateValue (int index, string val)
+        {
+            SinglyLinkedListNode currentnode = FirstNode;
+            SinglyLinkedListNode node = new SinglyLinkedListNode(val);
+
+            for (int i = 1; i < index; i++)
+            {
+                currentnode = currentnode.Next;
+            }
+            currentnode.Next = node;
         }
 
         public void AddAfter(string existingValue, string value)
@@ -167,8 +192,25 @@ namespace SinglyLinkedLists
 
         public int IndexOf(string value)
         {
-            throw new NotImplementedException();
-        }
+            SinglyLinkedListNode currentnode = FirstNode;
+            if (currentnode == null)
+            {
+                return -1;
+            } 
+            
+            int i = 0;
+            while (currentnode.Value != value)
+            {
+                currentnode = currentnode.Next;
+                if (currentnode == null)
+                {
+                    return -1;
+                }
+
+                i++;
+            }
+            return i;
+        }   
 
         public bool IsSorted()
         {
