@@ -214,7 +214,7 @@ namespace SinglyLinkedLists
 
         public bool IsSorted()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         // HINT 1: You can extract this functionality (finding the last item in the list) from a method you've already written!
@@ -254,7 +254,37 @@ namespace SinglyLinkedLists
 
         public void Remove(string value)
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode currentnode = FirstNode;
+            int deleteIndex = IndexOf(value);
+
+
+            if (deleteIndex == -1)
+            {
+            } else if (deleteIndex == 0)
+            {
+                FirstNode = currentnode.Next;
+            } else if (deleteIndex == 1)
+            {
+                currentnode.Next = currentnode.Next.Next;
+            } 
+            else
+            {
+                for (int i = 0; i < deleteIndex - 1; i++)
+                {
+                    currentnode = currentnode.Next;
+                }
+                if (Last() == value)
+                {
+                    currentnode.Next = null;
+                }
+                else
+                {
+                    currentnode.Next = currentnode.Next.Next.Next;
+                    currentnode.Next.Next = null;
+                }
+            }
+
+
         }
 
         public void Sort()
