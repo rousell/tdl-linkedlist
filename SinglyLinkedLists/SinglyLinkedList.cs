@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -214,6 +215,24 @@ namespace SinglyLinkedLists
 
         public bool IsSorted()
         {
+            SinglyLinkedListNode currentnode = FirstNode;
+
+
+            if (FirstNode == null || FirstNode.Next == null)
+            {
+                return true;
+            }
+            else 
+            {
+                while (currentnode.Next != null)
+                {
+                    if (String.Compare(currentnode.Value, currentnode.Next.Value, false) == 1)
+                    {
+                        return false;
+                    }
+                    currentnode = currentnode.Next;
+                }
+            }
             return true;
         }
 
@@ -290,6 +309,7 @@ namespace SinglyLinkedLists
         public void Sort()
         {
             throw new NotImplementedException();
+            
         }
 
         public string[] ToArray()
