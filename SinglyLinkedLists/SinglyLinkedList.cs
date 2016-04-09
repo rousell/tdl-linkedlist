@@ -67,32 +67,26 @@ namespace SinglyLinkedLists
             get { return this.ElementAt(i); }
             set
             {
-                if (i == 0)
-                {
-                    AddFirst(value);
-                } else
-                {
-                    UpdateValue(i, value);
-                }
+                UpdateValue(i, value);
+
             }
         }
 
         public void UpdateValue (int index, string val)
         {
             SinglyLinkedListNode currentnode = FirstNode;
-            SinglyLinkedListNode node = new SinglyLinkedListNode(val);
+            //SinglyLinkedListNode node = new SinglyLinkedListNode(val);
 
-            for (int i = 1; i < index; i++)
+            for (int i = 0; i < index; i++)
             {
                 currentnode = currentnode.Next;
             }
-            currentnode.Next = node;
+            currentnode.Value = val;
         }
 
         public void AddAfter(string existingValue, string value)
         {
             SinglyLinkedListNode node = new SinglyLinkedListNode(value);
-            SinglyLinkedListNode existVal = new SinglyLinkedListNode(existingValue);
             SinglyLinkedListNode currentnode = FirstNode;
             if (FirstNode == null)
             {
@@ -224,7 +218,7 @@ namespace SinglyLinkedLists
             }
             else 
             {
-                while (currentnode.Next != null)
+                while (currentnode.IsLast() == false)
                 {
                     if (String.Compare(currentnode.Value, currentnode.Next.Value, false) == 1)
                     {
@@ -308,8 +302,27 @@ namespace SinglyLinkedLists
 
         public void Sort()
         {
-            throw new NotImplementedException();
-            
+            if (IsSorted() == false)
+            {
+                SinglyLinkedListNode currentnode = FirstNode;
+                for (int i = 0; i < Count()-1; i++)
+                {
+                    currentnode = FirstNode;
+                    int counter = 0;
+
+                    while (currentnode.IsLast() == false)
+                    {
+                        if (String.Compare(currentnode.Value, currentnode.Next.Value, false) == 1)
+                        {
+                            string valcopy = currentnode.Value;
+                            this[counter] = currentnode.Next.Value;
+                            this[counter + 1] = valcopy;
+                        }
+                        currentnode = currentnode.Next;
+                        counter++;
+                    }
+                }
+            }     
         }
 
         public string[] ToArray()
