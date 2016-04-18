@@ -169,9 +169,15 @@ namespace SinglyLinkedLists
             {
                 while (i < index)
                 {
+                    if (currentnode == null)
+                    {
+                        throw new ArgumentOutOfRangeException();
+                    }
+
                     currentnode = currentnode.Next;
                     i++;
                 }
+
                 return currentnode.Value;
             } else
             {
